@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TwitterDemo/AppDelegate.swift"
-            timestampString = "478422417.415759"
+            timestampString = "478480539.626639"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "application(_:openURL:options:)"
             landmarkType = "5">
          </BreakpointContent>
