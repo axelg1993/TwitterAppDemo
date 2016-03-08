@@ -22,22 +22,27 @@ class TweetsCell: UITableViewCell {
         didSet {
             
             tweetsLabel.text = tweet.text as? String
+            
             nameLabel.text = tweet.user?.name
             
             usernameLabel.text = "@" + "\((tweet.user?.screenname)!)"
 
-            retweetLabel.text = "\(tweet.retweetCount)"
+            retweetLabel.text = "\(tweet.retweetCount as Int)"
             
             likesLabel.text = "\(tweet.favoritesCount)"
             
             profileImageView.setImageWithURL(tweet.user!.profileUrl!)
+       
             
-            //timeLabel.text = calculateTimeStamp(tweet.createdAt!.timeIntervalSinceNow)
+            timeLabel.text = calculateTimeStamp(tweet.createdAt!.timeIntervalSinceNow)
             
             
         }
     }
-/*
+    
+    
+
+    //All credit for this method goes to David Wayman, slack @dwayman
     func calculateTimeStamp(timeTweetPostedAgo: NSTimeInterval) -> String {
         // Turn timeTweetPostedAgo into seconds, minutes, hours, days, or years
         var rawTime = Int(timeTweetPostedAgo)
@@ -66,9 +71,8 @@ class TweetsCell: UITableViewCell {
         
         return "\(timeAgo)\(timeChar)"
     }
-  
-    */
     
+
 
 
     

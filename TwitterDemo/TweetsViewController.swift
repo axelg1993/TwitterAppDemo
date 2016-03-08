@@ -24,6 +24,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         
+        
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.estimatedRowHeight = 120
+        
         TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
             
             self.tweets = tweets
@@ -32,6 +36,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             
             for tweet in tweets {
                 print(tweet.text)
+             
             }
             
             }) { (error: NSError) -> () in
@@ -60,9 +65,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
       
         //cell.user = user[indexPath.row]
         
-        cell.tweet = tweets[indexPath.row]
+        if (tweets != nil) {
+            cell.tweet = tweets![indexPath.row]
+        }
         
-        //cell.retweetLabel.tag = tweets[indexPath.row].retweetCount
+       
         
         
         return cell
