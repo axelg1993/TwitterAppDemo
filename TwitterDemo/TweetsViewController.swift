@@ -75,28 +75,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
         
     }
-   /*
-    func likeButtonClicked (tweetCell: TweetsCell!) {
-                TwitterClient.sharedInstance.favoriteWithCompletion(["id": tweetID!]) { (tweet, error) -> () in
-        
-                    if (tweet != nil) {
-        
-                        self.favButton.setImage(UIImage(named: "like-action-on-red.png"), forState: UIControlState.Normal)
-        
-                        if self.favCountLabel.text! > "0" {
-                            self.favCountLabel.text = String(self.tweet.favCount! + 1)
-                        } else {
-                            self.favCountLabel.hidden = false
-                            self.favCountLabel.text = String(self.tweet.favCount! + 1)
-                        }
-        
-                    }
-                    else {
-                        print("Did it print the print fav tweet? cause this is the error message and you should not be seeing this.")
-                    }
-                }
-    }
-    */
+  
+    
     
     @IBAction func onLogoutButton(sender: AnyObject) {
         TwitterClient.sharedInstance.logout() 
