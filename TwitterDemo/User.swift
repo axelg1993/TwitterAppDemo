@@ -24,12 +24,13 @@ class User: NSObject {
         screenname = dictionary["screen_name"] as? String
         
         let profileUrlString = dictionary["profile_image_url_https"] as? String
-        if  profileUrlString != nil {
-            profileUrl = NSURL(string: profileUrlString!)
+        
+        if let profileUrlString = profileUrlString {
+            profileUrl = NSURL(string: profileUrlString)
         }
         
-        
         tagline = dictionary["description"] as? String
+       
 
  
     }
@@ -65,8 +66,7 @@ class User: NSObject {
 
         
         }
-//            user.dictionary
-            
+
             defaults.synchronize()
 
         }

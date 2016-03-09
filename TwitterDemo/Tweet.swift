@@ -17,8 +17,8 @@ class Tweet: NSObject {
     var favoritesCount: Int!
     var createdAtString: String?
     var createdAt: NSDate?
-    var id: NSNumber?
-
+    var id: NSString!
+    
     
     init(dictionary: NSDictionary) {
         
@@ -32,12 +32,13 @@ class Tweet: NSObject {
         
         createdAtString = dictionary["created_at"] as? String
         
-        id = dictionary["id"] as? Int
+        id = dictionary["id"] as? String
         
             let formatter = NSDateFormatter()
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         
         createdAt = formatter.dateFromString(createdAtString!)
+        
         
         
     
