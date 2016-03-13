@@ -19,7 +19,10 @@ class TweetsCell: UITableViewCell {
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var profileImageButton: UIButton!
+    var tweet_id: String!
     var count_retweet: Int?
+    
     var count_favourite: Int?
     
     
@@ -46,6 +49,8 @@ class TweetsCell: UITableViewCell {
             
             favButton.setImage(UIImage(named: "like-action-on-pressed-red"), forState: UIControlState.Normal)
             retweetButton.setImage(UIImage(named: "retweet-action-pressed"), forState: UIControlState.Normal)
+          
+            
             //replyButton.setImage(UIImage(named: "reply_action"), forState: UIControlState.Normal)
             
             
@@ -93,7 +98,7 @@ class TweetsCell: UITableViewCell {
     @IBAction func retweetButtonClicked(sender: AnyObject) {
         print(tweet.retweetCount)
         retweetButton.setImage(UIImage(named: "retweet-action_default"), forState: UIControlState.Normal)
-        //TwitterClient.sharedInstance.retweet(tweet.id as String)
+        //TwitterClient.sharedInstance.retweet(tweet_id)
         self.retweetLabel.text = "\(self.count_retweet!+1)"
         //print(tweet.retweetCount)
     }
@@ -104,7 +109,7 @@ class TweetsCell: UITableViewCell {
     @IBAction func favButtonClicked(sender: AnyObject) {
         print(tweet.favoritesCount)
         favButton.setImage(UIImage(named: "like-action-off"), forState: UIControlState.Normal)
-        //TwitterClient.sharedInstance.fav(tweet.id as String)
+        //TwitterClient.sharedInstance.fav(tweet_id)
         self.likesLabel.text = "\(self.count_favourite!+1)"
         //print(tweet.favoritesCount)
 
@@ -112,15 +117,10 @@ class TweetsCell: UITableViewCell {
     
     
     
-    
-    
-    
-    
-    
     override func awakeFromNib() {
         profileImageView.layer.cornerRadius = 4
         profileImageView.clipsToBounds = true
-        
+        profileImageView.userInteractionEnabled = true
         
         tweetsLabel.preferredMaxLayoutWidth = tweetsLabel.frame.size.width
         // Initialization code
@@ -134,6 +134,7 @@ class TweetsCell: UITableViewCell {
     
     
     override func setSelected(selected: Bool, animated: Bool) {
+        
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
