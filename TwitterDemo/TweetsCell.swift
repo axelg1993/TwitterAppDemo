@@ -53,9 +53,6 @@ class TweetsCell: UITableViewCell {
             
             //replyButton.setImage(UIImage(named: "reply_action"), forState: UIControlState.Normal)
             
-            
-            
-            
         }
     }
     

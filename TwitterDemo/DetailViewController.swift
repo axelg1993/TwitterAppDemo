@@ -8,13 +8,57 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var timeStampLabel: UILabel!
+    
+    
+    var tweet: [Tweet]?
+    var user: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        // we use our delegate
+        tap.delegate = self
+        
+        profileImageView.userInteractionEnabled = true
+        // add tap as a gestureRecognizer to tapView
+        profileImageView.addGestureRecognizer(tap)
+   
+        print(tweet)
+    
+        
+        //nameLabel.text = tweet.name
+        //userNameLabel.text =  "@\(tweet.user!.screenname!)"
+        //tweetLabel.text = tweet.text as? String
+        //profileImageView.setImageWithURL((tweet.user?.profileUrl)!)
+        
+       // retweetCountLabel.text = "\(tweet.retweetCount)"
+       // favoriteCountLabel.text = "\(tweet.favoritesCount)"
+        
+        favoriteButton.setImage(UIImage(named: "like-action-off"), forState: UIControlState.Normal)
+        retweetButton.setImage(UIImage(named: "retweet-action-inactive"), forState: UIControlState.Normal)
+        replyButton.setImage(UIImage(named: "reply-action"), forState: UIControlState.Normal)
+        
+        
     }
+        
+        
+        
+        // Do any additional setup after loading the view.
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

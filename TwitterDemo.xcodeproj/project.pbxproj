@@ -20,6 +20,7 @@
 		77D79AEC1C840E8800430370 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D79AEB1C840E8800430370 /* Assets.xcassets */; };
 		77D79AEF1C840E8800430370 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D79AED1C840E8800430370 /* LaunchScreen.storyboard */; };
 		77D79AF71C84113400430370 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D79AF61C84113400430370 /* LoginViewController.swift */; };
+		77E068661C98DFEC00A09757 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E068651C98DFEC00A09757 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		77D79AEE1C840E8800430370 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77D79AF01C840E8800430370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77D79AF61C84113400430370 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		77E068651C98DFEC00A09757 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8380832649851B7C5B9E38F2 /* Pods-TwitterDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterDemo/Pods-TwitterDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 				77A287A11C855E2400B3085E /* TweetsViewController.swift */,
 				7766F6881C95201900BD0608 /* DetailViewController.swift */,
 				7766F68A1C95281700BD0608 /* ComposeViewController.swift */,
+				77E068651C98DFEC00A09757 /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			files = (
 				7766F68B1C95281700BD0608 /* ComposeViewController.swift in Sources */,
 				776B3AF71C85007B00B526DF /* User.swift in Sources */,
+				77E068661C98DFEC00A09757 /* ProfileViewController.swift in Sources */,
 				77973E2C1C8AA8AB0015652F /* TweetsCell.swift in Sources */,
 				776B3AF91C85008E00B526DF /* Tweet.swift in Sources */,
 				77D79AF71C84113400430370 /* LoginViewController.swift in Sources */,

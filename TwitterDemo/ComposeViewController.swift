@@ -8,14 +8,51 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
-
+class ComposeViewController: UIViewController, UITextFieldDelegate {
+    
+    @IBOutlet weak var tweetField: UITextField!
+    
+    var reply: Bool = false
+    var tweet: Tweet?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tweetField.text = ""
+        
+        tweetField.becomeFirstResponder()
+        
+        if reply {
+            tweetField.text = "@\(tweet!.user!.screenname!) "
+        }
+        
+        
         // Do any additional setup after loading the view.
     }
 
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        tweetField.resignFirstResponder()
+    }
+    
+    @IBAction func onCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: {})
+    }
+    
+
+    @IBAction func onSendTweet(sender: AnyObject) {
+        var formattedString: String = ""
+        
+        if tweetField.text != "" || tweetField.text != " " {
+            formattedString = tweetField.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            
+            TwitterClient.sharedInstance.sendTweet(formattedString, params: nil, completion:  { (error) -> () in
+                self.dismissViewControllerAnimated(true, completion: {})
+            })
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
