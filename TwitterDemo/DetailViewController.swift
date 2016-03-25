@@ -22,47 +22,90 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var timeStampLabel: UILabel!
     
-    
-    var tweet: [Tweet]?
-    var user: User?
-    
+    var user: User!
+    var data: Tweet!
+    var tweetForSegue: Tweet!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-        // we use our delegate
+        // clicking on imageview renders profile vc
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.followingTap(_:)))
+        // use the delegate
         tap.delegate = self
         
         profileImageView.userInteractionEnabled = true
-        // add tap as a gestureRecognizer to tapView
+        // add tap as gestureRecognizer to the tapView
         profileImageView.addGestureRecognizer(tap)
-   
-        print(tweet)
-    
+
+        profileImageView.setImageWithURL(data.user!.profileUrl!)
         
-        //nameLabel.text = tweet.name
-        //userNameLabel.text =  "@\(tweet.user!.screenname!)"
-        //tweetLabel.text = tweet.text as? String
-        //profileImageView.setImageWithURL((tweet.user?.profileUrl)!)
+        profileImageView.layer.cornerRadius = 4
         
-       // retweetCountLabel.text = "\(tweet.retweetCount)"
-       // favoriteCountLabel.text = "\(tweet.favoritesCount)"
+        profileImageView.clipsToBounds = true
+
+        userNameLabel.text = "@" + "\((data.user?.screenName)!)"
         
-        favoriteButton.setImage(UIImage(named: "like-action-off"), forState: UIControlState.Normal)
+        timeStampLabel.text = calculateTimeStamp(data.createdAt!.timeIntervalSinceNow)
+
+        nameLabel.text = String(data.user!.name!)
+        
+        tweetLabel.text = String(data.text!)
+        
+        retweetCountLabel.text = String(data.retweetCount)
+        
+        favoriteCountLabel.text = String(data.favoritesCount)
+        
+        favoriteButton.setImage(UIImage(named: "like-action-off"), forState:
+            UIControlState.Normal)
+        
         retweetButton.setImage(UIImage(named: "retweet-action-inactive"), forState: UIControlState.Normal)
-        replyButton.setImage(UIImage(named: "reply-action"), forState: UIControlState.Normal)
         
+        replyButton.setImage(UIImage(named: "reply-action-0"), forState: UIControlState.Normal)
+       
+        tweetLabel.preferredMaxLayoutWidth = tweetLabel.frame.size.width
+
+    }
+    
+   func followingTap(sender: UITapGestureRecognizer? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let ViewController = storyBoard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        self.navigationController?.pushViewController(ViewController, animated: true)
         
     }
-        
-        
-        
-        // Do any additional setup after loading the view.
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    //again this method derived from the very special David Wayman, slack: @dwayman
+    func calculateTimeStamp(timeTweetPostedAgo: NSTimeInterval) -> String {
+        // Turn timeTweetPostedAgo into seconds, minutes, hours, days, or years
+        var rawTime = Int(timeTweetPostedAgo)
+        var timeAgo: Int = 0
+        var timeChar = ""
+        
+        rawTime = rawTime * (-1)
+        
+        // Figure out time ago
+        if (rawTime <= 60) { // SECONDS
+            timeAgo = rawTime
+            timeChar = "s"
+        } else if ((rawTime/60) <= 60) { // MINUTES
+            timeAgo = rawTime/60
+            timeChar = "m"
+        } else if (rawTime/60/60 <= 24) { // HOURS
+            timeAgo = rawTime/60/60
+            timeChar = "h"
+        } else if (rawTime/60/60/24 <= 365) { // DAYS
+            timeAgo = rawTime/60/60/24
+            timeChar = "d"
+        } else if (rawTime/(60/60/24/365) <= 1) { // ROUGH ESTIMATE OF YEARS
+            timeAgo = rawTime/60/60/24/365
+            timeChar = "y"
+        }
+        
+        return "\(timeAgo)\(timeChar)"
     }
     
 

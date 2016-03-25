@@ -19,14 +19,11 @@ class ComposeViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         tweetField.text = ""
-        
         tweetField.becomeFirstResponder()
         
         if reply {
-            tweetField.text = "@\(tweet!.user!.screenname!) "
+            tweetField.text = "@\(tweet!.user!.screenName!) "
         }
-        
-        
         // Do any additional setup after loading the view.
     }
 

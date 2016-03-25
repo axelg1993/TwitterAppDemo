@@ -9,11 +9,26 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var tweetCountLabel: UILabel!
+    @IBOutlet weak var followCountLabel: UILabel!
+    @IBOutlet weak var followingCountLabel: UILabel!
 
+    var tweet: Tweet!
+    var user: User!
+    var screenName: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    }        // Do any additional setup after loading the view.
+    
+    
+    @IBAction func backButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

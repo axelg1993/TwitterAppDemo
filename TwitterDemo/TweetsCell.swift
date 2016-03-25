@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol TweetsCellDelegate {
+    func tweetCellProfileImageTap(sender: AnyObject?)
+}
 
 class TweetsCell: UITableViewCell {
   
@@ -22,10 +25,8 @@ class TweetsCell: UITableViewCell {
     @IBOutlet weak var profileImageButton: UIButton!
     var tweet_id: String!
     var count_retweet: Int?
-    
     var count_favourite: Int?
-    
-    
+
     var tweet: Tweet! {
         didSet {
             
@@ -33,15 +34,14 @@ class TweetsCell: UITableViewCell {
             
             nameLabel.text = tweet.user?.name
             
-            usernameLabel.text = "@" + "\((tweet.user?.screenname)!)"
+            usernameLabel.text = "@" + "\((tweet.user?.screenName)!)"
 
             retweetLabel.text = "\(tweet.retweetCount as Int)"
             
             likesLabel.text = "\(tweet.favoritesCount)"
             
             profileImageView.setImageWithURL(tweet.user!.profileUrl!)
-       
-            
+    
             timeLabel.text = calculateTimeStamp(tweet.createdAt!.timeIntervalSinceNow)
            
             count_retweet = tweet.retweetCount
@@ -49,10 +49,6 @@ class TweetsCell: UITableViewCell {
             
             favButton.setImage(UIImage(named: "like-action-on-pressed-red"), forState: UIControlState.Normal)
             retweetButton.setImage(UIImage(named: "retweet-action-pressed"), forState: UIControlState.Normal)
-          
-            
-            //replyButton.setImage(UIImage(named: "reply_action"), forState: UIControlState.Normal)
-            
         }
     }
     
@@ -89,9 +85,6 @@ class TweetsCell: UITableViewCell {
     }
     
 
-
-
-    
     @IBAction func retweetButtonClicked(sender: AnyObject) {
         print(tweet.retweetCount)
         retweetButton.setImage(UIImage(named: "retweet-action_default"), forState: UIControlState.Normal)
@@ -106,10 +99,7 @@ class TweetsCell: UITableViewCell {
     @IBAction func favButtonClicked(sender: AnyObject) {
         print(tweet.favoritesCount)
         favButton.setImage(UIImage(named: "like-action-off"), forState: UIControlState.Normal)
-        //TwitterClient.sharedInstance.fav(tweet_id)
         self.likesLabel.text = "\(self.count_favourite!+1)"
-        //print(tweet.favoritesCount)
-
     }
     
     
@@ -118,7 +108,6 @@ class TweetsCell: UITableViewCell {
         profileImageView.layer.cornerRadius = 4
         profileImageView.clipsToBounds = true
         profileImageView.userInteractionEnabled = true
-        
         tweetsLabel.preferredMaxLayoutWidth = tweetsLabel.frame.size.width
         // Initialization code
     }

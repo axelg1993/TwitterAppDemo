@@ -10,30 +10,45 @@ import UIKit
 
 class User: NSObject {
     var name: String?
-    var screenname: String?;
+    var screenName: NSString?;
+    
     var profileUrl: NSURL?
     var tagline: NSString?
     var dictionary: NSDictionary?
+    var backgroundImageUrl = NSURL(string: "")
+
+    var followersCount: Int = 0
+    var followingCount: Int = 0
     
+    var tweetsCount: Int = 0
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
         
         name = dictionary["name"] as? String
         
-        screenname = dictionary["screen_name"] as? String
+        screenName = dictionary["screen_name"] as? String
         
+        
+        followersCount = (dictionary["followers_count"] as? Int) ?? 0
+        followingCount = (dictionary["friends_count"] as? Int) ?? 0
+        tweetsCount = (dictionary["statuses_count"] as? Int) ?? 0
+        
+
         let profileUrlString = dictionary["profile_image_url_https"] as? String
         
         if let profileUrlString = profileUrlString {
             profileUrl = NSURL(string: profileUrlString)
         }
         
-        tagline = dictionary["description"] as? String
        
-
- 
-    }
+        if (dictionary["profile_banner_url"]) != nil {
+            backgroundImageUrl = NSURL(string: (dictionary["profile_banner_url"] as? String)!)
+        }
+        
+        tagline = dictionary["description"] as? String
+           }
+    
     static let userDidLogoutNotification = "UserDidLogout"
 
     static var _currentUser: User?

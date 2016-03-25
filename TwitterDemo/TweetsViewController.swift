@@ -10,23 +10,18 @@ import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var tweets: [Tweet]?
-    
+    var tweets: [Tweet]!
+    var tweetForSegue: Tweet?
+    var screenName: String?
+    var USER: User?
+
     @IBOutlet weak var tableView: UITableView!
-    //TweetsCellDelegate
-   
-    //var cellDelegate: TweetCellDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let logo = UIImage(named: "TwitterLogo_#55acee")
-        let imageView = UIImageView(image:logo)
-        navigationItem.titleView=imageView
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
@@ -64,21 +59,27 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetsCell", forIndexPath: indexPath) as! TweetsCell
-      
-        //cell.user = user[indexPath.row]
         
         if (tweets != nil) {
             cell.tweet = tweets![indexPath.row]
         }
-        
-       
-        
-        
         return cell
-        
     }
-  
-    
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "composeSegue" {
+            let composeViewController = segue.destinationViewController as! ComposeViewController
+            composeViewController.tweet = tweetForSegue
+        } else if segue.identifier == "tweetSegue" {
+        let cell = sender as! TweetsCell
+        let indexPath = tableView.indexPathForCell(cell)
+        let data = tweets![indexPath!.row]
+        let detailViewController = segue.destinationViewController as! DetailViewController
+            detailViewController.data = data}
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+
     
     @IBAction func onLogoutButton(sender: AnyObject) {
         TwitterClient.sharedInstance.logout() 
