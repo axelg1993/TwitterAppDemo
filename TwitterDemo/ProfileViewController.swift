@@ -23,7 +23,22 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profileImageView.setImageWithURL(tweet.user!.profileUrl!)
+        
+        profileImageView.layer.cornerRadius = 4
+        
+        backgroundImageView.setImageWithURL(tweet.user!.backgroundImageUrl!)
 
+        profileImageView.clipsToBounds = true
+        
+        usernameLabel.text = "@" + "\((tweet.user!.screenName)!)"
+        
+        nameLabel.text = String(tweet.user!.name!)
+
+        tweetCountLabel.text = String(tweet.user!.tweetsCount)
+        followCountLabel.text = String(tweet.user!.followersCount)
+        followingCountLabel.text = String(tweet.user!.followingCount)
+        
     }        // Do any additional setup after loading the view.
     
     
